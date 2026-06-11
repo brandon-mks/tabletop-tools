@@ -186,8 +186,8 @@ function canSee(light, vision) {
  * @returns {number} damage dealt by the strike
  */
 function getStrikeDamage(attack, ac, damage) {
-  if (doesStrikeHit() === true) {
-    if (doesStrikeCrit() == true) {
+  if (doesStrikeHit(attack, ac) === true) {
+    if (doesStrikeCrit(attack, ac) == true) {
       return damage * 2;
     } else {
       return damage;
