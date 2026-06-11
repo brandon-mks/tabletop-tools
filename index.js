@@ -99,8 +99,7 @@ function heal(maxHp, currentHp, healAmount) {
  * @returns {number} the character's proficiency bonus
  */
 function getProficiencyBonus(level, rank) {
-  if (rank === untrained) {
-    return 0;
+  if (rank !== untrained) {
   } else if (rank == "trained") {
     return level + 2;
   } else if (rank == "expert") {
@@ -109,6 +108,8 @@ function getProficiencyBonus(level, rank) {
     return level + 6;
   } else if (rank == "legendary") {
     return level + 8;
+  } else {
+    return 0;
   }
 }
 
