@@ -6,7 +6,11 @@
  * @returns {boolean} whether the wizard can cast the spell
  */
 function canCastSpell(isSpellPrepared, hasScroll) {
-  // TODO
+  if (isSpellPrepared == true || hasScroll == true) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -17,7 +21,11 @@ function canCastSpell(isSpellPrepared, hasScroll) {
  * @returns {boolean} whether the creature is hidden from the observer
  */
 function isHidden(hiding, aware) {
-  // TODO
+  if (hiding == true || aware == false) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -28,7 +36,11 @@ function isHidden(hiding, aware) {
  * @returns {boolean} whether the strike hits
  */
 function doesStrikeHit(attack, ac) {
-  // TODO
+  if (attack >= ac) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -39,7 +51,11 @@ function doesStrikeHit(attack, ac) {
  * @returns {boolean} whether the strike is a critical hit
  */
 function doesStrikeCrit(attack, ac) {
-  // TODO
+  if (attack / ac >= 10) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -51,7 +67,19 @@ function doesStrikeCrit(attack, ac) {
  * @returns {number} total hit points after healing
  */
 function heal(maxHp, currentHp, healAmount) {
-  // TODO
+  if (currentHp === maxHp) {
+    return maxHp;
+  }
+  //i would separate the functions rather than having nested if/else statements but I'm
+  //not sure if the workshop is intending us to create multple functions within each function
+  else if (currentHp < maxHp) {
+    if (healAmount + currentHp < maxHp) {
+      currentHp += healAmount;
+      return currentHp;
+    } else if (healAmount + currentHp > maxHp) {
+      return maxHp;
+    }
+  }
 }
 
 /**
@@ -71,7 +99,17 @@ function heal(maxHp, currentHp, healAmount) {
  * @returns {number} the character's proficiency bonus
  */
 function getProficiencyBonus(level, rank) {
-  // TODO
+  if (rank === untrained) {
+    return 0;
+  } else if (rank == trained) {
+    return level + 2;
+  } else if (rank == expert) {
+    return level + 4;
+  } else if (rank == master) {
+    return level + 6;
+  } else if (rank == legendary) {
+    return level + 8;
+  }
 }
 
 /**
@@ -85,7 +123,13 @@ function getProficiencyBonus(level, rank) {
  * @returns {number} the cover bonus to AC
  */
 function getCoverBonus(behindObstacle, takingCover) {
-  // TODO
+  if (behindObstacle !== true) {
+    return 0;
+  } else if (behindObstacle === true && takingCover === true) {
+    return 4;
+  } else if (behindObstacle === true && takingCover === false) {
+    return 2;
+  }
 }
 
 /**
@@ -101,7 +145,14 @@ function getCoverBonus(behindObstacle, takingCover) {
  * @returns {number} the creature's remaining HP after taking damage
  */
 function getRemainingHp(maxHp, currentHp, damage) {
-  // TODO
+  if (damage > maxHp * 2) {
+    console.log("Found dead in a ditch");
+    return -1;
+  } else if (damage < maxHp) {
+    currentHp -= damage;
+    return currentHp;
+  } else if (currentHp - damage < 0) currentHp = 0;
+  return 0;
 }
 
 /**
@@ -113,7 +164,15 @@ function getRemainingHp(maxHp, currentHp, damage) {
  * @returns {boolean} whether the creature can see
  */
 function canSee(light, vision) {
-  // TODO
+  if (light === bright) {
+    return true;
+  } else if (vision === dark) {
+    return true;
+  } else if (light === dim && vision !== average) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -127,5 +186,13 @@ function canSee(light, vision) {
  * @returns {number} damage dealt by the strike
  */
 function getStrikeDamage(attack, ac, damage) {
-  // TODO
+  if (doesStrikeHit() === true) {
+    if (doesStrikeCrit() == true) {
+      return damage * 2;
+    } else {
+      return damage;
+    }
+  } else {
+    return 0;
+  }
 }
